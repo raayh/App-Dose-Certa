@@ -68,8 +68,8 @@ O **Dose Certa** é um aplicativo de celular feito para ajudar as pessoas a toma
 
 ### 🟡 PREPARAÇÃO TÉCNICA
 - **Semana 3-4:** Objetivo: App rodando ("Hello World")
-  - [ ] Instalar ambiente (Node, Expo).
-  - [ ] Firebase: Configurar Firestore e Auth e conectar.
+  - [x] Instalar ambiente (Node, Expo).
+  - [x] Firebase: Configurar Firestore e Auth e conectar.
 
 ### 🔵 MVP (NÚCLEO DO SISTEMA)
 - **Semana 5:** Funcionalidade 1 (Login Frontend e Firebase Auth).

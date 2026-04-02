@@ -9,7 +9,14 @@ Este documento detalha como a infraestrutura de backend foi configurada no proje
   - **Authentication:** Método E-mail/Senha habilitado e login com Google também.
   - **Firestore Database:** Configurado em **Modo de Teste** (leitura/escrita aberta por 30 dias para desenvolvimento do MVP).
 
-## 2. Segurança de Credenciais
+## 2. Instalação do SDK
+Para integrar o Firebase ao projeto Expo, utilizamos o comando:
+```bash
+npx expo install firebase
+```
+*(Utilizamos o `npx expo install` em vez do `npm install` comum porque o Expo garante a versão mais compatível com o seu ambiente).*
+
+## 3. Segurança de Credenciais
 Todas as chaves de API são armazenadas no arquivo `.env.local` na raiz do projeto.
 - **Prefixos:** Utilizamos `EXPO_PUBLIC_` para que o Expo exponha essas variáveis no código frontend.
 - **Proteção:** O arquivo `.env.local` está no `.gitignore` para nunca ser enviado ao repositório público.
