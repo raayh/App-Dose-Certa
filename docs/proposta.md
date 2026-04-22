@@ -72,10 +72,18 @@ O **Dose Certa** é um aplicativo de celular feito para ajudar as pessoas a toma
   - [x] Firebase: Configurar Firestore e Auth e conectar.
 
 ### 🔵 MVP (NÚCLEO DO SISTEMA)
-- **Semana 5:** Funcionalidade 1 (Login Frontend e Firebase Auth).
-- **Semana 6:** Funcionalidade 2 (Cadastro de medicamentos: nome, dosagem, horário).
-- **Semana 7:** Funcionalidade 3 (Listagem dos medicamentos).
-- **Semana 8:** Fechamento MVP (Marcar como "tomado" e salvar histórico).
+- **Semana 5:** Objetivo: Lógica de Login e Cadastro (Firebase Auth)
+  - [x] Implementar Interface de Login (Figma style).
+  - [x] Conectar Firebase Auth (Login/Cadastro).
+- **Semana 6:** Objetivo: Cadastro de medicamentos no Firestore.
+  - [/] Criar formulário de medicamentos (Nome, Dosagem, Horário).
+  - [ ] Implementar função de escrita no Firestore.
+- **Semana 7:** Objetivo: Listagem dos medicamentos (Dashboard).
+  - [ ] Implementar leitura em tempo real dos remédios do dia.
+  - [ ] Criar interface de cards para visualização clara.
+- **Semana 8:** Objetivo: Fechamento MVP (Histórico e Ações).
+  - [ ] Implementar botão de "Tomado" (Check-in).
+  - [ ] Salvar registros de histórico em nova coleção no Firestore.
 
 ### 🟣 REFINAMENTO E ADICIONAIS
 - **Semana 9-10:** UX/UI e Lembretes (Interface limpa, push notifications simuladas e validações visuais).
