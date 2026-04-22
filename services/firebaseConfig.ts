@@ -1,6 +1,8 @@
 import { initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth";
+// @ts-ignore (Erro falso-positivo do TypeScript com o React Native+Firebase)
+import { initializeAuth, getReactNativePersistence } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
+import ReactNativeAsyncStorage from '@react-native-async-storage/async-storage';
 
 // Aqui nós "puxamos" as chaves do seu arquivo secreto
 const firebaseConfig = {
@@ -15,8 +17,11 @@ const firebaseConfig = {
 // Inicializa o Firebase
 const app = initializeApp(firebaseConfig);
 
-// Inicializamos os serviços específicos usando o app que já criamos
-export const auth = getAuth(app); // 
+// Configura o Auth para usar memória de longo prazo (AsyncStorage)
+export const auth = initializeAuth(app, {
+  persistence: getReactNativePersistence(ReactNativeAsyncStorage)
+});
+
 export const db = getFirestore(app);
 
 /* 

@@ -4,6 +4,12 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image, Alert, ActivityIndicator } from 'react-native';
 
+// ==========================================
+// 2. IMPORTAÇÕES DO FIREBASE (Auth e Banco)
+// ==========================================
+import { signInWithEmailAndPassword, createUserWithEmailAndPassword, sendEmailVerification, signOut } from 'firebase/auth';
+import { auth } from '@/services/firebaseConfig';
+
 export default function LoginScreen() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -15,10 +21,29 @@ export default function LoginScreen() {
   const handleLogin = async () => {
     setLoading(true); // Começa o simbolo de carregar
     try {
-      // Simula tempo de rede no front-end
-      await new Promise(r => setTimeout(r, 1000));
+      // Se der certo, o _layout.tsx percebe e te manda pra Home sozinho!
+      const credenciais = await signInWithEmailAndPassword(auth, email, password);
+
+      if (!credenciais.user.emailVerified) {
+        await signOut(auth); // Se não verificou, chuta pra fora!
+        Alert.alert("Acesso Negado", "Email não verificado");
+        return;
+      }
+
     } catch (error: any) {
-      console.log("ERRO");
+      console.log("ERRO REAL DO FIREBASE:", error.code);
+      if (error.code === 'auth/invalid-credential'){
+         Alert.alert(
+          `O e-mail ${email} não foi encontrado.`,
+          "Deseja criar uma conta com este e-mail e senha?",
+          [
+            { text: "Não", style: "cancel" },
+            { text: "Sim, Criar!", onPress: () => handleSignUp() }
+          ]
+        );
+      } else {
+        Alert.alert("Erro", "E-mail ou senha inválidos");
+      }
     } finally {
       // Para de carregar, não importa o que aconteça
       setLoading(false);
@@ -31,8 +56,14 @@ export default function LoginScreen() {
   const handleSignUp = async () => {
     setLoading(true);
     try {
-      await new Promise(r => setTimeout(r, 1000));
+      const credentials = await createUserWithEmailAndPassword(auth, email, password);
+      const user = credentials.user;
+
+      await sendEmailVerification(user); 
+      await signOut(auth);
+      Alert.alert("Aguardando confirmação", "Enviamos um link de confirmação. Verifique sua caixa de entrada (ou Spam)!")
     } catch (error) {
+      Alert.alert("Erro no cadastro", "A senha deve ter pelo menos 6 caracteres.");
     } finally {
       setLoading(false);
     }
