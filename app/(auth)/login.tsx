@@ -8,7 +8,8 @@ import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image, Alert, Acti
 // 2. IMPORTAÇÕES DO FIREBASE (Auth e Banco)
 // ==========================================
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword, sendEmailVerification, signOut } from 'firebase/auth';
-import { auth } from '@/services/firebaseConfig';
+import { doc, setDoc } from 'firebase/firestore';
+import { auth, db } from '@/services/firebaseConfig';
 
 export default function LoginScreen() {
   const [email, setEmail] = useState('')
@@ -59,6 +60,17 @@ export default function LoginScreen() {
       const credentials = await createUserWithEmailAndPassword(auth, email, password);
       const user = credentials.user;
 
+      // =========================================
+      // BANCO DE DADOS (Firestore)
+      // 1. doc(): Localiza/Cria a "gaveta" 'users' usando a chave secreta 'user.uid'
+      // 2. setDoc(): Guarda os dados lá dentro
+      // =========================================
+      await setDoc(doc(db, "users", user.uid), {
+        email: user.email,
+        created_at: new Date()
+      });
+
+      // Verifica se o email existe
       await sendEmailVerification(user); 
       await signOut(auth);
       Alert.alert("Aguardando confirmação", "Enviamos um link de confirmação. Verifique sua caixa de entrada (ou Spam)!")
@@ -200,3 +212,4 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   }
 });
+
