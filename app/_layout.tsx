@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react'; // Memória e Gatilho
 import { onAuthStateChanged } from 'firebase/auth'; // O Vigilante
 import { auth } from '@/services/firebaseConfig'; // Nossas chaves
 import { useColorScheme } from '@/hooks/use-color-scheme';
+import { useFonts, Poppins_400Regular, Poppins_500Medium, Poppins_700Bold } from '@expo-google-fonts/poppins'
 
 export default function RootLayout() {
   const colorScheme = useColorScheme();
@@ -12,6 +13,7 @@ export default function RootLayout() {
   const [initializing, setInitializing] = useState(true); // Memória de "carregando"
   const router = useRouter();
   const segments = useSegments(); // Diz em qual "pasta" o app está agora
+  const [fontsLoaded] = useFonts({ Poppins_400Regular, Poppins_500Medium, Poppins_700Bold });
 
   // Aqui é onde ligamos o Vigilante do Firebase
   useEffect(() => {
@@ -33,9 +35,9 @@ export default function RootLayout() {
     } else if (user && inAuthGroup) {
       router.replace('/(tabs)');
     }
-  }, [user, segments, initializing]); // Se TEM usuário mas ele tentou entrar no login... manda pra Home!
+  }, [user, segments, initializing, fontsLoaded]); // Se TEM usuário mas ele tentou entrar no login... manda pra Home!
 
-  if (initializing) return null; // Enquanto o Firebase não responde, não mostra nada
+  if (initializing || !fontsLoaded) return null; // Enquanto o Firebase não responde OU as fontes não carregam, não mostra nada
 
   return (
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
