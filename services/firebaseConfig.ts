@@ -3,6 +3,7 @@ import { initializeApp } from "firebase/app";
 import { initializeAuth, getReactNativePersistence } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 import ReactNativeAsyncStorage from '@react-native-async-storage/async-storage';
+import { Platform } from 'react-native';
 
 // Aqui nós "puxamos" as chaves do seu arquivo secreto
 const firebaseConfig = {
@@ -17,10 +18,11 @@ const firebaseConfig = {
 // Inicializa o Firebase
 const app = initializeApp(firebaseConfig);
 
-// Configura o Auth para usar memória de longo prazo (AsyncStorage)
-export const auth = initializeAuth(app, {
-  persistence: getReactNativePersistence(ReactNativeAsyncStorage)
-});
+// Se for celular (Native), injeta o AsyncStorage. Se for Web, deixa vazio para usar o padrão do Chrome.
+export const auth = initializeAuth(
+  app, 
+  Platform.OS !== 'web' ? { persistence: getReactNativePersistence(ReactNativeAsyncStorage) } : {}
+);
 
 export const db = getFirestore(app);
 
