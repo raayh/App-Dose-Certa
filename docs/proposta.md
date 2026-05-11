@@ -76,18 +76,29 @@ O **Dose Certa** é um aplicativo de celular feito para ajudar as pessoas a toma
   - [x] Implementar Interface de Login (Figma style).
   - [x] Conectar Firebase Auth (Login/Cadastro).
 - **Semana 6:** Objetivo: Cadastro de medicamentos no Firestore.
-  - [/] Criar formulário de medicamentos (Nome, Dosagem, Horário).
-  - [ ] Implementar função de escrita no Firestore.
+  - [x] Criar formulário de medicamentos (Nome, Dosagem, Horário).
+  - [x] Implementar função de escrita no Firestore.
 - **Semana 7:** Objetivo: Listagem dos medicamentos (Dashboard).
-  - [ ] Implementar leitura em tempo real dos remédios do dia.
+  - [/] Implementar leitura em tempo real dos remédios do dia.
   - [ ] Criar interface de cards para visualização clara.
 - **Semana 8:** Objetivo: Fechamento MVP (Histórico e Ações).
   - [ ] Implementar botão de "Tomado" (Check-in).
   - [ ] Salvar registros de histórico em nova coleção no Firestore.
 
 ### 🟣 REFINAMENTO E ADICIONAIS
-- **Semana 9-10:** UX/UI e Lembretes (Interface limpa, push notifications simuladas e validações visuais).
-- **Semana 11:** Profissionalismo (Caça aos bugs, code review de pasta `services/`, documentação fina no README).
+- **Semana 9-10:** UX/UI e Lembretes
+  - [ ] Adicionar ícone de "olhinho" 👁️ para visualizar/ocultar senha no login.
+  - [ ] Implementar botão de "Esqueci minha senha" com `sendPasswordResetEmail`.
+  - [ ] Estilizar os templates de e-mail do Firebase (Confirmação e Redefinição de Senha).
+  - [ ] Push notifications simuladas e validações visuais.
+  - [ ] Calendário interativo: clicar em dias passados/futuros para ver remédios tomados ou programados.
+  - [ ] **Pixel Perfect:** Criar `DayComponent` customizado no calendário para que o nome do dia também fique verde ao ser selecionado.
+- **Semana 11:** Profissionalismo (Caça aos Bugs)
+  - [ ] 🐛 **Bug #1:** Tratar erro `auth/invalid-credential` separando "e-mail não existe" de "senha incorreta" usando `fetchSignInMethodsForEmail`.
+  - [ ] 🐛 **Bug #2:** Sincronizar Firebase Auth e Firestore — Se o documento do usuário não existir no Firestore ao logar, recriá-lo automaticamente via `setDoc`.
+  - [ ] 🐛 **Bug #3:** Tratar erro `auth/network-request-failed` alertando o usuário sobre a falta de conexão de internet de forma clara e amigável em vez de exibir a mensagem genérica de erro.
+  - [ ] 🛡️ **Segurança:** Realizar auditoria de dependências (`npm audit fix`) e resolver vulnerabilidades críticas.
+  - [ ] Code review da pasta `services/` e documentação final no README.
 - **Semana 12:** Apresentação (Pitch do Problema -> Solução -> Demo Real).
 
 ---

@@ -1,7 +1,7 @@
 // ==========================================
 // 1. IMPORTAÇÕES (React e Componentes Visuais)
 // ==========================================
-import React, { useState } from 'react';
+import React, { AnyActionArg, useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image, Alert, ActivityIndicator } from 'react-native';
 
 // ==========================================
@@ -74,7 +74,8 @@ export default function LoginScreen() {
       await sendEmailVerification(user); 
       await signOut(auth);
       Alert.alert("Aguardando confirmação", "Enviamos um link de confirmação. Verifique sua caixa de entrada (ou Spam)!")
-    } catch (error) {
+    } catch (error: any) {
+      console.log("ERRO REAL DO FIREBASE:", error.code)
       Alert.alert("Erro no cadastro", "A senha deve ter pelo menos 6 caracteres.");
     } finally {
       setLoading(false);
