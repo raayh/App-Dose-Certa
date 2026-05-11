@@ -1,7 +1,7 @@
 import { initializeApp } from "firebase/app";
 // @ts-ignore (Erro falso-positivo do TypeScript com o React Native+Firebase)
 import { initializeAuth, getReactNativePersistence } from "firebase/auth";
-import { getFirestore } from "firebase/firestore";
+import { initializeFirestore } from "firebase/firestore";
 import ReactNativeAsyncStorage from '@react-native-async-storage/async-storage';
 import { Platform } from 'react-native';
 
@@ -24,7 +24,10 @@ export const auth = initializeAuth(
   Platform.OS !== 'web' ? { persistence: getReactNativePersistence(ReactNativeAsyncStorage) } : {}
 );
 
-export const db = getFirestore(app);
+export const db = initializeFirestore(app, {
+  experimentalForceLongPolling: true, // 👈 Força o uso de requisições estáveis
+});
+
 
 /* 
 Lembre-se: 
