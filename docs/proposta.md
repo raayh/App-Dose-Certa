@@ -79,11 +79,11 @@ O **Dose Certa** é um aplicativo de celular feito para ajudar as pessoas a toma
   - [x] Criar formulário de medicamentos (Nome, Dosagem, Horário).
   - [x] Implementar função de escrita no Firestore.
 - **Semana 7:** Objetivo: Listagem dos medicamentos (Dashboard).
-  - [/] Implementar leitura em tempo real dos remédios do dia.
-  - [ ] Criar interface de cards para visualização clara.
+  - [x] Implementar leitura em tempo real dos remédios do dia.
+  - [x] Criar interface de cards para visualização clara.
 - **Semana 8:** Objetivo: Fechamento MVP (Histórico e Ações).
-  - [ ] Implementar botão de "Tomado" (Check-in).
-  - [ ] Salvar registros de histórico em nova coleção no Firestore.
+  - [x] Implementar botão de "Tomado" (Check-in).
+  - [x] Salvar registros de histórico em nova coleção no Firestore.
 
 ### 🟣 REFINAMENTO E ADICIONAIS
 - **Semana 9-10:** UX/UI e Lembretes
@@ -91,8 +91,6 @@ O **Dose Certa** é um aplicativo de celular feito para ajudar as pessoas a toma
   - [ ] Implementar botão de "Esqueci minha senha" com `sendPasswordResetEmail`.
   - [ ] Estilizar os templates de e-mail do Firebase (Confirmação e Redefinição de Senha).
   - [ ] Push notifications simuladas e validações visuais.
-  - [ ] Calendário interativo: clicar em dias passados/futuros para ver remédios tomados ou programados.
-  - [ ] **Pixel Perfect:** Criar `DayComponent` customizado no calendário para que o nome do dia também fique verde ao ser selecionado.
 - **Semana 11:** Profissionalismo (Caça aos Bugs)
   - [ ] 🐛 **Bug #1:** Tratar erro `auth/invalid-credential` separando "e-mail não existe" de "senha incorreta" usando `fetchSignInMethodsForEmail`.
   - [ ] 🐛 **Bug #2:** Sincronizar Firebase Auth e Firestore — Se o documento do usuário não existir no Firestore ao logar, recriá-lo automaticamente via `setDoc`.
@@ -133,4 +131,4 @@ Para garantir a melhor experiência do usuário e acessibilidade, os seguintes w
 ## 🔒 Considerações de Segurança
 
 - [x] Arquivos `.env` ignorados no `.gitignore`.
-- [ ] Firebase Rules fechadas para impedir acesso não autenticado a dados de saúde de terceiros.
+- [x] Firebase Rules fechadas para impedir acesso não autenticado a dados de saúde de terceiros.
