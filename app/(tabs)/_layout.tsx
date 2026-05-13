@@ -14,7 +14,8 @@ export default function TabLayout() {
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: '#65b874ff',
+        tabBarActiveTintColor: '#65b87470', 
+        tabBarInactiveTintColor: '#65b874ff',
         tabBarShowLabel: false,
         tabBarIconStyle: {
           flex: 1,
@@ -58,14 +59,14 @@ export default function TabLayout() {
           tabBarIcon: () => (
             <View style={{
               backgroundColor: '#65b874ff',
-              width: 60,
-              height: 60,
-              borderRadius: 30,
+              width: 78,
+              height: 78,
+              borderRadius: 40,
               justifyContent: 'center',
               alignItems: 'center',
-              top: -20,
+              top: -34,
             }} > 
-              <Ionicons name="add" size={32} color="#fff" />
+              <Ionicons name="add" size={50} color="#fff" />
             </View>
           )
         }}
@@ -74,7 +75,8 @@ export default function TabLayout() {
       <Tabs.Screen
         name="explore"
         options={{
-          title: 'ellipsis-horizontal',
+          title: '',
+          tabBarStyle: { display: 'none'},
           tabBarIcon: ({ color, size }) => <Ionicons name="ellipsis-horizontal" size={size} color={color} />
         }}
       />
