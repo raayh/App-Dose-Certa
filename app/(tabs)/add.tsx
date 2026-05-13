@@ -52,7 +52,7 @@ export default function AddScreen() {
   const [name, setName] = useState('');
   const [type, setType] = useState('Comprimido');
   const [timesPerDay, seTtimesPerDay] = useState(1);
-  const [amountPerTime, setAmountPerTime] = useState(1);
+  const [dosageAmount, setDosageAmount] = useState('');
   const [startTime, setStartTime] = useState(new Date(2000, 0, 1, 8, 0));
   const [showPicker, setShowPicker] = useState(false);
   const [showDatePicker, setShowDatePicker] = useState(false);
@@ -66,16 +66,25 @@ export default function AddScreen() {
   const [selectedDayOfMonth, setSelectedDayOfMonth] = useState(15);
   const [selectedDays, setSelectedDays] = useState<number[]>([0,1,2,3,4,5,6]); 
   
+  
   const medicationTypes = [ 
     { name: 'Comprimido'},
     { name: 'Cápsula'},
     { name: 'Gotas'},
     { name: 'Xarope'},
     { name: 'Injeção'},
-    { name: 'Outros'}
+    { name: 'Outros'},
   ]
 
   const daysOfWeek = [ 'D', 'S', 'T', 'Q', 'Q', 'S', 'S' ]
+  const unitMap: Record<string, string> = {
+    "Comprimido": "mg",
+    "Cápsula": "mg",
+    "Gotas": "gotas",
+    "Xarope": "ml",
+    "Injeção": "ml",
+    "Outros": "" // outros não tem essa opção
+  }
 
 
    // Intervalo em minutos (24 horas * 60 minutos / quantidade de vezes)
@@ -170,7 +179,7 @@ export default function AddScreen() {
         name: name,
         type: type,
         timesPerDay: timesPerDay,
-        amountPerTime: amountPerTime,
+        dosage: dosageAmount ? `${dosageAmount} ${unitMap[type]}`.trim() : '',
         times: times,
         startDate: startDate.toISOString(),
         repeatType: repeatType,
@@ -202,7 +211,7 @@ export default function AddScreen() {
     setName('');
     setType('Comprimido');
     seTtimesPerDay(1);
-    setAmountPerTime(1);
+    setDosageAmount('');
     
     // 1. Resetar data e hora de início:
     setStartTime(new Date(2000, 0, 1, 8, 0)); // Volta para 08:00
@@ -268,12 +277,42 @@ export default function AddScreen() {
             />
           </View>
           <View style={styles.settingRow}>
-            <Text style={styles.settingRowText}> Quantidade por vez</Text>
-            <Counter 
-              value={amountPerTime}
-              onIncrement={() => setAmountPerTime(amountPerTime + 1)}
-              onDecrement={() => setAmountPerTime(amountPerTime - 1)}
-            />
+            <Text style={styles.settingRowText}>Dosagem</Text>
+            {/* A "Falsa" Caixinha (Visualmente parece um input só!) */}
+            <View style={{
+              flexDirection: 'row', 
+              alignItems: 'center', 
+              borderColor: '#65b874ff',
+              borderWidth: 0.5,
+              borderRadius: 8,
+              paddingHorizontal: 8,
+              paddingVertical: 2,
+              backgroundColor: '#FFFFFF',
+            }}>
+              <TextInput 
+                style={{
+                  fontFamily: 'Poppins_500Medium',
+                  fontSize: 13,
+                  color: '#333',
+                  textAlign: 'center',
+                  minWidth: type === 'Outros' ? 100 : 35, // Caixinha maior se for digitar texto livre
+                  padding: 0,
+                }} 
+                // A mágica: Se for "Outros", abre o teclado de letras!
+                keyboardType={type === 'Outros' ? 'default' : 'numeric'}
+                autoCapitalize="none"
+                value={dosageAmount}
+                onChangeText={setDosageAmount}
+                placeholder={type === 'Outros' ? "Ex: 1 colher" : "Ex: 20"}
+              />
+              
+              {/* Só desenha a unidade se NÃO for "Outros" */}
+              {type !== 'Outros' && (
+                <Text style={{ fontFamily: 'Poppins_500Medium', fontSize: 13, color: '#333', marginLeft: 4 }}>
+                  {unitMap[type]}
+                </Text>
+              )}
+            </View>
           </View>
           <View style={styles.setHours}>
             {times.map((hour, index) => (
@@ -624,9 +663,8 @@ const styles = StyleSheet.create({
   setHours: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-
   },
-  frequencySelector:{
+  frequencySelector:{ 
     backgroundColor: '#FFFFFF',
     borderRadius: 24,
     paddingHorizontal: 16,

@@ -26,10 +26,25 @@ export interface Medication {
   name: string; // Nome do remédio.
   type: string; // Ex: "Comprimido", "Gotas".
   timesPerDay: number; // Quantidade de vezes por dia.
-  amountPerTime: number; // Dose por vez.
+  dosage: string; // Ex: "20 mg", "5 ml"
   times: string[]; // Lista de horários ["08:00", "16:00"].
   startDate: string; // Data de início (ISO string).
   repeatType: string; // Ex: "Todos os dias", "Seg, Qua".
   endDate: string | null; // Data final do tratamento ou null.
   created_at: string; // Timestamp da criação.
+}
+
+// ---------------------------------------------------------
+// 3. HISTÓRICO DE MEDICAMENTOS (Coleção "history")
+// Registra cada vez que o usuário tomou (ou pulou) um remédio.
+// ---------------------------------------------------------
+export interface MedicationHistory {
+  id?: string;
+  user_id: string; // Para garantir a segurança
+  medication_id: string; // A qual "receita" isso pertence
+  name: string; // Desnormalizado para facilitar a leitura na UI
+  time: string; // O horário que estava agendado (ex: "08:00")
+  date: string; // O dia do calendário (ex: "2026-05-12")
+  taken: boolean; // true (tomado), false (pulado)
+  taken_at: string; // Timestamp exato do clique
 }
