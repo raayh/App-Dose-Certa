@@ -22,7 +22,7 @@ const medicationImages = {
   "Cápsula": require('@/assets/images/capsula.png'),
   "Gotas": require('@/assets/images/capsula.png'),
   "Xarope": require('@/assets/images/xarope.png'),
-  "Injeção": require('@/assets/images/pote_comprimidos.png'),
+  "Injeção": require('@/assets/images/injeção.png'),
   "outros": require('@/assets/images/pote_comprimidos.png'),
 }
 
