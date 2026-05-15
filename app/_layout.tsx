@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react'; // Memória e Gatilho
 import { onAuthStateChanged } from 'firebase/auth'; // O Vigilante
 import { auth } from '@/services/firebaseConfig'; // Nossas chaves
 import { useColorScheme } from '@/hooks/use-color-scheme';
-import { useFonts, Poppins_400Regular, Poppins_500Medium, Poppins_700Bold } from '@expo-google-fonts/poppins'
+import { useFonts, Poppins_400Regular, Poppins_500Medium, Poppins_600SemiBold, Poppins_700Bold } from '@expo-google-fonts/poppins'
 
 export default function RootLayout() {
   const colorScheme = useColorScheme();
@@ -13,7 +13,7 @@ export default function RootLayout() {
   const [initializing, setInitializing] = useState(true); // Memória de "carregando"
   const router = useRouter();
   const segments = useSegments(); // Diz em qual "pasta" o app está agora
-  const [fontsLoaded] = useFonts({ Poppins_400Regular, Poppins_500Medium, Poppins_700Bold });
+  const [fontsLoaded] = useFonts({ Poppins_400Regular, Poppins_500Medium, Poppins_600SemiBold, Poppins_700Bold });
 
   // Aqui é onde ligamos o Vigilante do Firebase
   useEffect(() => {
