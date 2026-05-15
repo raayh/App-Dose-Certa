@@ -86,15 +86,19 @@ O **Dose Certa** é um aplicativo de celular feito para ajudar as pessoas a toma
   - [x] Salvar registros de histórico em nova coleção no Firestore.
 
 ### 🟣 REFINAMENTO E ADICIONAIS
-- **Semana 9-10:** UX/UI e Lembretes
+- **Semana 9-10:** UX/UI, Acessibilidade e Lembretes
   - [ ] Adicionar ícone de "olhinho" 👁️ para visualizar/ocultar senha no login.
   - [ ] Implementar botão de "Esqueci minha senha" com `sendPasswordResetEmail`.
   - [ ] Estilizar os templates de e-mail do Firebase (Confirmação e Redefinição de Senha).
   - [ ] Push notifications simuladas e validações visuais.
-- **Semana 11:** Profissionalismo (Caça aos Bugs)
+  - [ ] 📳 **Feedback Háptico:** Adicionar vibrações físicas do celular (`expo-haptics`) no check-in de doses para reforço sensorial.
+  - [ ] 👴 **Acessibilidade Dinâmica:** Revisar cartões de remédio para suportar fontes gigantes do sistema sem quebrar layouts.
+- **Semana 11:** Profissionalismo e Resiliência (Caça aos Bugs)
   - [ ] 🐛 **Bug #1:** Tratar erro `auth/invalid-credential` separando "e-mail não existe" de "senha incorreta" usando `fetchSignInMethodsForEmail`.
   - [ ] 🐛 **Bug #2:** Sincronizar Firebase Auth e Firestore — Se o documento do usuário não existir no Firestore ao logar, recriá-lo automaticamente via `setDoc`.
   - [ ] 🐛 **Bug #3:** Tratar erro `auth/network-request-failed` alertando o usuário sobre a falta de conexão de internet de forma clara e amigável em vez de exibir a mensagem genérica de erro.
+  - [ ] 🐛 **Bug #4 (Crítico):** Substituir `toISOString()` por data local (`en-CA`) para impedir o "Bug do Fuso Horário" que inverte dias após às 21:00.
+  - [ ] 📴 **Resiliência Offline:** Configurar explicitamente cache nativo do Firestore para marcações sem internet (ex: elevadores).
   - [ ] 🛡️ **Segurança:** Realizar auditoria de dependências (`npm audit fix`) e resolver vulnerabilidades críticas.
   - [ ] Code review da pasta `services/` e documentação final no README.
 - **Semana 12:** Apresentação (Pitch do Problema -> Solução -> Demo Real).
