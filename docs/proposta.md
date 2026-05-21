@@ -87,12 +87,14 @@ O **Dose Certa** é um aplicativo de celular feito para ajudar as pessoas a toma
 
 ### 🟣 REFINAMENTO E ADICIONAIS
 - **Semana 9-10:** UX/UI, Acessibilidade e Lembretes
-  - [ ] Adicionar ícone de "olhinho" 👁️ para visualizar/ocultar senha no login.
-  - [ ] Implementar botão de "Esqueci minha senha" com `sendPasswordResetEmail`.
-  - [ ] Estilizar os templates de e-mail do Firebase (Confirmação e Redefinição de Senha).
-  - [ ] Push notifications simuladas e validações visuais.
-  - [ ] 📳 **Feedback Háptico:** Adicionar vibrações físicas do celular (`expo-haptics`) no check-in de doses para reforço sensorial.
-  - [ ] 👴 **Acessibilidade Dinâmica:** Revisar cartões de remédio para suportar fontes gigantes do sistema sem quebrar layouts.
+  - [x] Adicionar ícone de "olhinho" 👁️ para visualizar/ocultar senha no login.
+  - [x] Implementar botão de "Esqueci minha senha" com `sendPasswordResetEmail`.
+  - [x] Estilizar os templates de e-mail do Firebase (Confirmação e Redefinição de Senha).
+        ⚠️ Bloqueado: Firebase Spark plan não permite edição de templates neste projeto. 
+        Requer upgrade para plano Blaze ou SMTP customizado.
+  - [x] Push notifications locais e validações visuais.
+  - [x] 📳 **Feedback Háptico:** Adicionar vibrações físicas do celular (`expo-haptics`) no check-in de doses para reforço sensorial.
+  - [x] 👴 **Acessibilidade Dinâmica:** Revisar cartões de remédio para suportar fontes gigantes do sistema sem quebrar layouts.
 - **Semana 11:** Profissionalismo e Resiliência (Caça aos Bugs)
   - [ ] 🐛 **Bug #1:** Tratar erro `auth/invalid-credential` separando "e-mail não existe" de "senha incorreta" usando `fetchSignInMethodsForEmail`.
   - [ ] 🐛 **Bug #2:** Sincronizar Firebase Auth e Firestore — Se o documento do usuário não existir no Firestore ao logar, recriá-lo automaticamente via `setDoc`.
