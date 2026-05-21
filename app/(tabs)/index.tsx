@@ -76,10 +76,12 @@ export default function HomeScreen() {
         id: doc.id,
         ...doc.data()
       } as Medication)).filter(med => {
+        const startOnly = med.startDate.split('T')[0]; // "2026-05-21T..." → "2026-05-21"
+        const endOnly = med.endDate ? med.endDate.split('T')[0] : null;
         // O remédio ainda não começou
-        if (selectedDate < med.startDate) return false;
+        if (selectedDate < startOnly) return false;
         // O tratamento já acabou
-        if (med.endDate && selectedDate > med.endDate) return false;
+        if (endOnly && selectedDate > endOnly) return false;
         return true;
       });
 
@@ -156,7 +158,7 @@ export default function HomeScreen() {
       // 2. Salvamos na NOVA coleção "history"
       await addDoc(collection(db, "history"), historyLog);
       
-      Alert.alert("Sucesso!", `${item.name} marcado como tomado! ✅`);
+      Alert.alert("Sucesso!", `${item.name} marcado como  ${isTaken ? "tomado ✅" : "pulado ⏭️"}!`);
       
       // 3. Temporariamente: Vamos sumir com ele da tela "na força do ódio" (Estado Local)
       // até ensinarmos o fecthMedications a ler o histórico!

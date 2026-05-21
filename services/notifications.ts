@@ -1,18 +1,23 @@
-// ⚠️ Import dinâmico: carrega a lib só quando a função é chamada
-// Isso evita que o Expo Go trave ao abrir o arquivo
+import Constants from 'expo-constants';
+
+// Detecta se está rodando no Expo Go (que não suporta expo-notifications no SDK 53+)
+const isExpoGo = Constants.appOwnership === 'expo';
 
 export async function requestNotificationPermission(): Promise<boolean> {
+    if (isExpoGo) return false; // Pula silenciosamente no Expo Go
+
     try {
         const Notifications = await import('expo-notifications');
         const { status } = await Notifications.requestPermissionsAsync();
         return status === 'granted';
     } catch {
-        // Expo Go não suporta — retorna false silenciosamente
         return false;
     }
 }
 
 export async function scheduleNotification(medicineName: string, time: string): Promise<void> {
+    if (isExpoGo) return; // Pula silenciosamente no Expo Go
+
     try {
         const Notifications = await import('expo-notifications');
         const [hours, minutes] = time.split(':').map(Number);
@@ -29,8 +34,9 @@ export async function scheduleNotification(medicineName: string, time: string): 
             },
         });
     } catch {
-        // Expo Go não suporta — falha silenciosa
+        // Falha silenciosa
     }
 }
+
 
 
