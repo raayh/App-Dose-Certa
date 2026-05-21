@@ -226,7 +226,7 @@ export default function HomeScreen() {
                       <View style={styles.cardTopRow}>
                         <Image source={medicationImages[item.type as keyof typeof medicationImages] || medicationImages["outros"]} style={styles.medicationImage}/>
                         <View style={styles.cardText}> 
-                          <Text style={[styles.cardTitle, {color: '#FFF'}]}>{item.name}</Text>
+                          <Text style={[styles.cardTitle, {color: '#FFF'}]} numberOfLines={1} ellipsizeMode="tail">{item.name}</Text>
                           <Text style={[styles.cardSubtitle, {color: '#E0F8E0'}]}>{item.type}{item.dosage ? `, ${item.dosage}` : ''}</Text>
                           <View style={styles.cardTime}>
                             <Ionicons name="time-outline" size={20} color="#FFF"/>
@@ -384,10 +384,10 @@ const styles = StyleSheet.create({
     gap: 5
   },
   cardTitle: {
-    fontFamily: 'Poppins_500Medium', // Após instalar e carregar
+    fontFamily: 'Poppins_500Medium',
     fontSize: 18,
     color: '#333',
-    width: 180,
+    flex: 1, // 👴 Acessibilidade: cresce com o espaço disponível
   },
   cardSubtitle: {
     color: '#777',
@@ -405,7 +405,8 @@ const styles = StyleSheet.create({
     marginTop: 10,
     marginLeft: 24,
     paddingVertical: 4,
-    width: 180,
+    flex: 1,        // 👴 Acessibilidade: flexível
+    maxWidth: 180,  // mas nunca maior que 180
     justifyContent: 'center',
     alignItems: 'center',
     shadowColor: '#000',
