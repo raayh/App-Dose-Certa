@@ -8,7 +8,7 @@ import { Ionicons } from '@expo/vector-icons';
 // ==========================================
 // 2. IMPORTAÇÕES DO FIREBASE (Auth e Banco)
 // ==========================================
-import { signInWithEmailAndPassword, createUserWithEmailAndPassword, sendEmailVerification, signOut } from 'firebase/auth';
+import { signInWithEmailAndPassword, createUserWithEmailAndPassword, sendEmailVerification, sendPasswordResetEmail, signOut } from 'firebase/auth';
 import { doc, setDoc } from 'firebase/firestore';
 import { auth, db } from '@/services/firebaseConfig';
 
@@ -85,10 +85,19 @@ export default function LoginScreen() {
     }
   }
 
+  const handleForgotPassword = async () => {
+    try {
+      await sendPasswordResetEmail(auth, email)
+      Alert.alert("E-mail enviado!","Verifique sua caixa de entrada.")
+    } catch (error: any) {
+      Alert.alert("Não foi possivel enviar o e-mail.", "Verifique se o endereço está correto e tente novamente.")
+    }
+  };
+
   const showPasswordState = () => {
     setShowPassword(!showPassword) 
   }
-  
+
   return (
     <View style={styles.container}>
       {/* 1. Topo (Logo/Título) */}
@@ -139,6 +148,15 @@ export default function LoginScreen() {
               />
             </TouchableOpacity>
           </View>
+          <TouchableOpacity 
+            onPress={handleForgotPassword} 
+            disabled={loading}
+            // style={{ 
+            //   alignItems: 'flex-end', 
+            // }}
+            >
+             <Text style={styles.forgotPasswordText}>Esqueci minha senha</Text>
+          </TouchableOpacity>
         </View>
       </View>
 
@@ -231,6 +249,14 @@ const styles = StyleSheet.create({
     fontFamily: 'Poppins_500Medium',
     fontSize: 24,
     textAlign: 'center',
+  },
+  forgotPasswordText:{
+    color: '#65b874ff',
+    fontFamily: 'Poppins_400Regular',
+    fontSize: 13,
+    textAlign: 'right',
+    textDecorationLine: 'underline',
+    margin: 5
   }
 });
 
