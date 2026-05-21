@@ -3,6 +3,7 @@
 // ==========================================
 import React, { AnyActionArg, useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image, Alert, ActivityIndicator } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 
 // ==========================================
 // 2. IMPORTAÇÕES DO FIREBASE (Auth e Banco)
@@ -14,7 +15,9 @@ import { auth, db } from '@/services/firebaseConfig';
 export default function LoginScreen() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [showPassword, setShowPassword] = useState(false)
   const [loading, setLoading] = useState(false);
+  
   
   // ==========================================
   // FUNÇÃO: LOGIN (Entrar em conta existente)
@@ -82,6 +85,9 @@ export default function LoginScreen() {
     }
   }
 
+  const showPasswordState = () => {
+    setShowPassword(!showPassword) 
+  }
   
   return (
     <View style={styles.container}>
@@ -111,14 +117,28 @@ export default function LoginScreen() {
         </View>
         <View>
           <Text style={styles.textInput}>Senha</Text>
-          <TextInput 
-            style={styles.input} 
-            value={password}
-            onChangeText={setPassword}
-            secureTextEntry={true}
-            placeholder="12345" 
-            placeholderTextColor="#00000060"
-          ></TextInput>
+          <View style={{ position: 'relative' }}>
+            <TextInput
+              style={styles.input}
+              value={password}
+              onChangeText={setPassword}
+              secureTextEntry={!showPassword}   // ← mudança do 3a
+              placeholder="123456"
+              placeholderTextColor="#00000060"
+            />
+
+            {/* Botão do olhinho, flutuando no canto direito */}
+            <TouchableOpacity
+              onPress={showPasswordState}       // ← chama sua função
+              style={{ position: 'absolute', right: 15, top: 13 }}
+            >
+              <Ionicons
+                name={showPassword ? 'eye' : 'eye-off'}  // ← troca o ícone
+                size={20}
+                color="#333"
+              />
+            </TouchableOpacity>
+          </View>
         </View>
       </View>
 
