@@ -7,6 +7,7 @@ import { signOut } from 'firebase/auth';
 import { CalendarProvider, WeekCalendar } from 'react-native-calendars'
 import { LocaleConfig } from 'react-native-calendars';
 import { Ionicons } from '@expo/vector-icons';
+import * as Haptics from 'expo-haptics';
 
 LocaleConfig.locales['pt-br'] = {
   monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
@@ -238,7 +239,10 @@ export default function HomeScreen() {
                       <View style={styles.cardButtonRow}>
                         <TouchableOpacity 
                           style={styles.saveButton}
-                          onPress={() => handleTakeMedication(item, true)}
+                          onPress={() => {
+                            Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
+                            handleTakeMedication(item, true)
+                          }}
                           disabled={loading}
                         >
                           {loading ? (
@@ -250,7 +254,10 @@ export default function HomeScreen() {
 
                         <TouchableOpacity 
                           style={styles.skipButton}
-                          onPress={() => handleTakeMedication(item, false)}
+                          onPress={() => {
+                            Haptics.notificationAsync(Haptics.NotificationFeedbackType.Warning);
+                            handleTakeMedication(item, false)
+                          }}
                           disabled={loading}
                         >
                           <Text style={styles.skipButtonText}>Pular dose</Text>
