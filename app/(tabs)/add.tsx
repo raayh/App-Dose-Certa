@@ -5,6 +5,7 @@ import DateTimePicker from '@react-native-community/datetimepicker'
 import { router } from 'expo-router';
 import { auth, db } from '@/services/firebaseConfig';
 import { collection, addDoc } from 'firebase/firestore';
+import { requestNotificationPermission, scheduleNotification } from '@/services/notifications';
 
 function Counter({value, onIncrement, onDecrement}: {
   value: number;
@@ -169,6 +170,11 @@ export default function AddScreen() {
       return;
     }
 
+    const granted = await requestNotificationPermission();
+    if(!granted){
+      Alert.alert("Permissão negada", "Ative as notificações para receber lembretes.");
+    }
+
     setLoading(true);
 
     // Simulando o processo de salvar no banco por 1.5 segundos
@@ -189,6 +195,17 @@ export default function AddScreen() {
 
       // 2. Desliga o loading e mostra o sucesso!
       setLoading(false);
+      
+      if(granted){
+        try{
+          for (const time of times){
+            await scheduleNotification(name, time);
+          }
+        } catch (notifError) {
+            console.warn("Notificações não suportadas neste ambiente:", notifError);
+        }
+      }
+
       Alert.alert(
         "Sucesso 🎉", 
         `O medicamento "${name}" foi cadastrado com sucesso!`,
@@ -200,6 +217,7 @@ export default function AddScreen() {
           }
         }]
       );
+
     } catch (error){
       console.log("Erro ao salvar:", error);
       setLoading(false);
