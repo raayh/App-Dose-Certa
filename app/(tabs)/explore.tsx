@@ -172,10 +172,10 @@ export default function HistoryScreen() {
               style={styles.medicationImage}
             />
             
-            <View style={styles.cardText}> 
+            <View style={[styles.cardText, { flex: 1 }]}> 
               <View style={styles.cardTextHeader}>
-                <Text style={styles.cardTitle}>{item.name}</Text>
-                <Text style={styles.cardSubtitle}>{item.dosage ? `${item.dosage}` : ''}</Text>
+                <Text style={styles.cardTitle} numberOfLines={1} ellipsizeMode="tail">{item.name}</Text>
+                <Text style={styles.cardSubtitle} numberOfLines={1}>{item.dosage ? `${item.dosage}` : ''}</Text>
               </View>
               <View style={styles.cardTime}>
                 <Ionicons name="time-outline" size={20} color="#333"/>
@@ -278,6 +278,7 @@ const styles = StyleSheet.create({
     height: 50,
   },
   cardText: {
+    flex: 1,  // 👴 Acessibilidade: ocupa espaço sem empurrar o status
     gap: 5
   },
   cardTextHeader: {
