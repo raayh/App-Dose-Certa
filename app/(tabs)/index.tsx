@@ -190,11 +190,11 @@ export default function HomeScreen() {
     <CalendarProvider date={selectedDate}> 
       <View style={styles.container}>
 
-        {/* <View style={styles.header}>
+        { <View style={styles.header}>
           <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
             <Text style={styles.logoutText}>Sair</Text>
           </TouchableOpacity>
-        </View>   */}
+        </View>   }
 
         <View style={styles.calendarContainer}>
           <WeekCalendar 
