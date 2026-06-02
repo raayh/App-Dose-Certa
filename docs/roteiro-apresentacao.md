@@ -27,8 +27,8 @@ Este roteiro foi otimizado para uma gravação de **5 minutos** (aproximadamente
 **Apresentadores:** Pedro & Levi (Tempo: 1m 15s)
 
 > **Pedro:**
-> "No mercado, analisamos concorrentes como o *Medisafe* e o *MyTherapy*. 
-> O problema deles é a poluição visual, excesso de anúncios e a exigência de conexão constante com a internet, o que falha em ambientes como subsolos, elevadores ou metrôs."
+> "No mercado, analisamos concorrentes como o **Medisafe** e o **MyTherapy**. 
+> O **Medisafe** é muito poluído visualmente, cheio de propagandas, telas de assinatura premium e estatísticas complexas que assustam o idoso. O **MyTherapy** foca em diários de saúde amplos (pressão, humor, peso), o que dificulta o uso rápido e simples de quem quer apenas registrar sua pílula diária. Além disso, ambos exigem conexão constante com a internet, falhando em ambientes como subsolos, elevadores ou metrôs."
 
 > **Levi:**
 > "O diferencial do Dose Certa é a simplicidade e a **resiliência offline**. 
