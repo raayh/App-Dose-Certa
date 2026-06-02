@@ -34,14 +34,13 @@ Este roteiro foi otimizado para uma gravação de **5 minutos** (aproximadamente
 > "O diferencial do Dose Certa é a simplicidade e a **resiliência offline**. 
 > O usuário faz o check-in da dose instantaneamente e, mesmo sem internet, os dados são salvos localmente e sincronizados em segundo plano quando a conexão retorna."
 
----
-
-## 🗣️ Slide 3: Desafio Técnico Superado
+## 🗣️ Slide 3: Desafios do Projeto
 **Apresentador:** Cauan (Tempo: 1m 15s)
 
 > **Cauan:**
-> "No backend, nosso maior desafio foi o **Bug do Fuso Horário**. Usar `toISOString()` registrava check-ins após as 21h no dia seguinte devido ao fuso UTC-3. Resolvemos padronizando as operações e o banco de dados locais com `.toLocaleDateString('en-CA')`.
-> Também eliminamos condições de corrida na inicialização do app. Substituímos a leitura síncrona de `currentUser` pelo listener ativo `onAuthStateChanged`, evitando que telas principais montassem vazias por atraso na resposta de autenticação."
+> "Como equipe, os nossos maiores desafios foram de gestão e concepção do projeto. Primeiro, enfrentamos a curva de aprendizado de desenvolver nosso primeiro aplicativo mobile utilizando React Native e Firebase. 
+> Segundo, a conciliação das nossas rotinas individuais de trabalho e estudo, superada através da adoção rigorosa do método **Git Flow** para controle de branches e entregas organizadas no GitHub.
+> Por fim, nosso grande objetivo foi fugir do óbvio: não queríamos criar apenas mais um app repetitivo do mercado. O desafio foi desenhar uma solução de fato útil e inclusiva, aliando acessibilidade e resiliência offline para gerar valor real na rotina do idoso."
 
 ---
 
